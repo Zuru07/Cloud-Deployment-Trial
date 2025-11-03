@@ -70,7 +70,7 @@ const htmlContent = `
 </head>
 <body>
   <h1>CI/CD Pipeline is a Success! </h1>
-  <p>Your changes deployed effortlessly on Google Cloud Platform.</p>
+  <p>Your changes have been deployed effortlessly on Google Cloud Platform.</p>
   <button class="button" onclick="window.location.reload()">Refresh Status</button>
   <footer>Powered by Express & GCP </footer>
 </body>
