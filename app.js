@@ -1,15 +1,3 @@
-// const express = require('express');
-// const app = express();
-// const PORT = process.env.PORT || 8080;
-
-// app.get('/', (req, res) => {
-//   res.send('<h1>Hello from GCP Cloud Run! CI/CD works! But does it though????</h1>');
-// });
-
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
-
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -84,7 +72,7 @@ const htmlContent = `
   <h1>CI/CD is a Success! </h1>
   <p>Your changes deployed effortlessly on GCP Cloud Run.</p>
   <button class="button" onclick="window.location.reload()">Refresh Status</button>
-  <footer>Powered by Express & Google Cloud Platform/footer>
+  <footer>Powered by Express & Google Cloud Platform</footer>
 </body>
 </html>
 `;
