@@ -1,14 +1,14 @@
 pipeline {
     agent any
     environment {
-        GCP_PROJECT   = 'your-gcp-project-id'   // CHANGE ME
+        GCP_PROJECT   = 'eastern-rider-477015-v1'   
         IMAGE_NAME    = 'hello-gcp'
         IMAGE_TAG     = "${env.BUILD_NUMBER}"
         REGISTRY_URL  = "${GCP_PROJECT}-docker.pkg.dev/${GCP_PROJECT}/my-repo/${IMAGE_NAME}"
     }
     stages {
         stage('Checkout') {
-            steps { git url: 'https://github.com/YOUR_GITHUB_USERNAME/my-ci-cd-demo.git', branch: 'main' }
+            steps { git url: 'https://github.com/Zuru07/CIA2-AWS-Project.git', branch: 'main' }
         }
         stage('Build & Test') {
             steps {
