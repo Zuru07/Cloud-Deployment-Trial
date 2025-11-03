@@ -2,20 +2,19 @@ pipeline {
     agent any
     environment {
         GCP_PROJECT   = 'eastern-rider-477015-v1'
-        IMAGE_NAME    = 'hello-gcp'
+        IMAGE_NAME    = 'my-maven-app'
         IMAGE_TAG     = "${env.BUILD_NUMBER}"
         REGISTRY_URL  = "us-central1-docker.pkg.dev/${GCP_PROJECT}/my-repo"
     }
     stages {
         stage('Checkout') {
-            steps { 
-                git url: 'https://github.com/Zuru07/CIA2-AWS-Project.git', branch: 'main' 
+            steps {
+                git url: 'https://github.com/Zuru07/CIA2-AWS-Project.git', branch: 'main'
             }
         }
         stage('Build & Test') {
             steps {
-                sh 'npm install'
-                sh 'npm test'
+                sh 'mvn clean package'
             }
         }
         stage('Docker Build') {
@@ -37,9 +36,9 @@ pipeline {
         stage('Deploy to Cloud Run') {
             steps {
                 withCredentials([file(credentialsId: 'gcp-jenkins-sa', variable: 'GC_KEY')]) {
-                    sh "gcloud auth activate-service-account --key-file=${GC_KEY}"
                     sh """
-                    gcloud run deploy hello-gcp \
+                    gcloud auth activate-service-account --key-file=${GC_KEY}
+                    gcloud run deploy ${IMAGE_NAME} \
                       --image=${REGISTRY_URL}/${IMAGE_NAME}:latest \
                       --platform=managed \
                       --region=us-central1 \
@@ -52,7 +51,7 @@ pipeline {
         }
     }
     post {
-        success { echo 'Pipeline succeeded!' }
-        failure { echo 'Pipeline failed!' }
+        success { echo "Pipeline succeeded!" }
+        failure { echo "Pipeline failed!" }
     }
 }
